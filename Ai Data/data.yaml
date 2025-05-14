@@ -1,0 +1,7 @@
+path: C:\Users\Chani\Documents\yolo\data
+train: train\images
+val: validation\images
+
+nc: 6
+
+names: ["Bus", "Car", "Fire Truck", "Pickup Truck", "Police Vehicle", "Truck"]
