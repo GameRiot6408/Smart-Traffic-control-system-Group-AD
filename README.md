@@ -16,7 +16,6 @@ A project to simulate a **Smart Traffic Light System** using Raspberry Pi 5, Ope
   - Python
   - OpenCV
   - YOLOv8 (via Ultralytics)
-  - GPIO (Raspberry Pi GPIO control)
   - Picamera2
 
 <br>
