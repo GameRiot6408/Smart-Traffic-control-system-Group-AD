@@ -11,14 +11,13 @@ A project to simulate a **Smart Traffic Light System** using Raspberry Pi 5, Ope
   - Raspberry Pi Camera Module (IMX219)
   - Toy Cars
   - LEDs (to simulate traffic lights)
-  - Jumper Wires, Breadboard
 
 - **Software:**
   - Python
   - OpenCV
   - YOLOv8 (via Ultralytics)
   - GPIO (Raspberry Pi GPIO control)
-  - libcamera
+  - Picamera2
 
 <br>
 
