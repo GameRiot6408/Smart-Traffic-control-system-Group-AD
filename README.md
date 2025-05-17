@@ -117,9 +117,7 @@ smart-traffic-control/
 
 ⚡ Future Improvements
 <ul>
-<li>Use real-time vehicle tracking for smoother light transitions.</li>
-
-<li>Integrate cloud logging of traffic patterns.</li>
+<li>Integrate cloud logging for traffic patterns.</li>
 
 <li>Add pedestrian detection for crosswalk signals.</li>
 </ul>
