@@ -63,7 +63,10 @@ A project to simulate a **Smart Traffic Light System** using Raspberry Pi 5, Ope
 
 ## 📷 Sample Output
 
-<source src="samples/traffic test.mp4" type="video/mp4">
+<video width="500" controls>
+    <source src="sample video/traffic test.mp4" type="video/mp4">
+    
+</video>
 <img src="samples/sample_img.png" width="500" alt="Sample Detection image">
 
 <br>
