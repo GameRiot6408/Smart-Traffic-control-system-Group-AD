@@ -5,6 +5,7 @@ import json
 import os
 import csv
 import threading
+import serial
 import asyncio
 from datetime import datetime
 from zoneinfo import ZoneInfo
@@ -30,7 +31,7 @@ LED_PINS = {
     3: 4,  # Lane 3 → LED #3
 }
 
-# Scoring weights 
+# Scoring weights (tune to your needs)
 W_WAIT   = 0.5   # weight for live wait time
 W_QUEUE  = 1.0   # weight for current queue length
 W_EMERG  = 2.0   # weight for live emergency priority
@@ -46,56 +47,30 @@ priority_weights = {
 alpha      = 0.2   # smoothing factor: lower = smoother
 min_hold_s = 5.0   # seconds to hold green after last EMS leaves
 
-# ── BLE CENTRAL SETUP ─────────────────────────────────────────────────────────
-ESP32_MAC           = "ec:da:3b:bd:60:ce"
-CHARACTERISTIC_UUID = "abcdef01-1234-5678-1234-56789abcdef0"
+# ── USB-SERIAL SETUP ─────────────────────────────────────────────────────────
+SERIAL_PORT = '/dev/ttyUSB1'      # adjust if needed
+BAUD_RATE   = 115200
 
-ble_client = None
-ble_loop   = None
+# Open serial port once at startup
+ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=0.1)
+time.sleep(2)  # give Arduino time to reset
 
 # track last state per lane so we only send on change
 last_states = {lane: None for lane in LED_PINS}
-
-async def ble_client_loop():
-    global ble_client
-    while True:
-        try:
-            async with BleakClient(ESP32_MAC) as client:
-                ble_client = client
-                print(f"[BLE] Connected to {ESP32_MAC}")
-                await client.is_connected()
-        except Exception as e:
-            print(f"[BLE] Connection failed: {e}")
-        print("[BLE] Disconnected; retrying in 5s...")
-        await asyncio.sleep(5)
-
-def start_ble_thread():
-    global ble_loop
-    ble_loop = asyncio.new_event_loop()
-    t = threading.Thread(
-        target=lambda: ble_loop.run_until_complete(ble_client_loop()),
-        daemon=True
-    )
-    t.start()
-
-start_ble_thread()
 
 def send_led_states(active_lane, counts):
     """
     Send ON to the active_lane (if it has vehicles), OFF to others,
     but only when the desired state differs from last sent.
     """
-    if not ble_client or not ble_client.is_connected:
+    if not ser.is_open:
         return
 
     for lane_idx, led_num in LED_PINS.items():
         want = "ON" if (lane_idx == active_lane and counts[lane_idx] > 0) else "OFF"
         if want != last_states[lane_idx]:
-            cmd = f"{led_num}:{want}".encode()
-            asyncio.run_coroutine_threadsafe(
-                ble_client.write_gatt_char(CHARACTERISTIC_UUID, cmd),
-                ble_loop
-            )
+            cmd = f"{led_num}:{want}\n"
+            ser.write(cmd.encode('utf-8'))
             last_states[lane_idx] = want
 
 # ── Google Drive Upload Helpers (unchanged) ─────────────────────────────────
@@ -433,3 +408,4 @@ while True:
 save_config()
 csv_file.close()
 cv2.destroyAllWindows()
+
