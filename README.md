@@ -70,17 +70,46 @@ A project to simulate a **Smart Traffic Light System** using Raspberry Pi 5, Ope
 
 ```bash
 smart-traffic-control/
-├── camera/
-│   └── capture.py        # Handles camera input using libcamera
-├── detection/
-│   └── yolo_detect.py    # Runs YOLOv8 on incoming frames
-├── control/
-│   └── traffic_light.py  # Logic to control GPIO traffic lights
-├── config.py             # Config for pins, thresholds, paths
-├── traffic_control.py    # Main script
-├── requirements.txt
-└── README.md
-
+|   README.md
+|
++---Ai Data
+|   |   data.yaml
+|   |   yolov8n.pt
+|   |   yolo_train_val_split.py
+|   |
+|   +---data
+|   |   +---train
+|   |   |   |   labels.cache
+|   |   |   |
+|   |   |   +---images
+|   |   |   |
+|   |   |   \---labels
+|   |   |   
+|   |   \---validation
+|   |       |   labels.cache
+|   |       |
+|   |       +---images
+|   |       |
+|   |       \---labels
+|   \---runs
+|       \---detect
+|           \---train20
+|               
+|
+\---Scripts
+    +---led control
+    |   +---arduino nano (wired - over usb)
+    |   |   \---trafficcontrol_nano
+    |   |           trafficcontrol_nano.ino
+    |   |
+    |   \---Esp32
+    |       \---ble_lights_2
+    |               ble_lights_2.ino
+    |
+    \---Raspberry Pi
+            detection boxes with score and go + cvs+ wired leds.py
+            Final Traffic control script.py
+```
 <br>
 
 ⚡ Future Improvements
