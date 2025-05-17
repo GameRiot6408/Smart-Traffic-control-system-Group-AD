@@ -44,18 +44,19 @@ A project to simulate a **Smart Traffic Light System** using Raspberry Pi 5, Ope
 
     ```bash
     pip install -r requirements.txt
+    Create a service account key (secret) .json file and place it next to the python script.
     ```
 
 3. **Connect your hardware:**
 
     - Connect the Raspberry Pi Camera (IMX219) to the CSI port.
-    - Wire up LEDs to GPIO pins (check `config.py` for pin numbers).
+    - Wire up LEDs to Arduino or ESP32.
     - Place toy cars on the road simulation for detection.
 
 4. **Run the system:**
 
     ```bash
-    python3 traffic_control.py
+    Copy and paste the code into a ide of your choice (ie: Thonny) or use the terminal
     ```
 
 <br>
