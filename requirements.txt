@@ -1,0 +1,21 @@
+# Computer vision
+opencv-python>=4.11.0.86           # Official pre-built OpenCV bindings :contentReference[oaicite:0]{index=0}
+numpy>=1.22.0                     # Fundamental package for array operations :contentReference[oaicite:1]{index=1}
+
+# Raspberry Pi camera
+picamera2                        # Picamera2 interface (install via apt or pip) :contentReference[oaicite:2]{index=2}
+
+# Object detection / tracking
+ultralytics>=8.3.137             # Ultralytics YOLO SOTA models :contentReference[oaicite:3]{index=3}
+
+# Serial communication
+pyserial>=3.5                    # Python Serial Port Extension :contentReference[oaicite:4]{index=4}
+
+# Bluetooth LE
+bleak>=0.22.0                    # BLE GATT client for Python (async) :contentReference[oaicite:5]{index=5}
+
+# Google Drive API
+google-api-python-client>=2.0.0  # Google API discovery-based client :contentReference[oaicite:6]{index=6}
+google-auth>=2.40.1              # Google authentication library :contentReference[oaicite:7]{index=7}
+google-auth-httplib2>=0.1.0      # httplib2 transport for google-auth :contentReference[oaicite:8]{index=8}
+google-auth-oauthlib>=1.2.2      # OAuthlib integration for google-auth :contentReference[oaicite:9]{index=9}
